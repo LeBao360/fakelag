@@ -1,0 +1,37 @@
+# Environment variables & Sensitive API secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Keystores & Signing Keys
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.mobileprovision
+
+# Build outputs
+build/
+bin/
+obj/
+Payload/
+*.ipa
+*.apk
+*.aab
+
+# OS Generated
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.swp
+*.iml
+.gradle/
+local.properties
+DerivedData/
+*.xcuserstate
+xcuserdata/

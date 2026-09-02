@@ -21,9 +21,21 @@ except ImportError:
     print("Đã cài thư viện xong. Vui lòng chạy lại tool!")
     sys.exit()
 
-API_URL = "https://script.google.com/macros/s/AKfycbzyGT_Q9eSVQm8NruSTP-DUak3dvTL2wpuJbeBrkJB5O9G8IbIHKSPmWTpswG98Ah7cbA/exec"
-ADMIN_PASSWORD = "Lebao@" 
-MASTER_PASSWORD = "Lebao@" 
+def load_env():
+    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
+    if os.path.exists(env_path):
+        with open(env_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    k, v = line.split('=', 1)
+                    os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+load_env()
+
+API_URL = os.getenv("FAKELAG_API_URL", "https://script.google.com/macros/s/AKfycbzyGT_Q9eSVQm8NruSTP-DUak3dvTL2wpuJbeBrkJB5O9G8IbIHKSPmWTpswG98Ah7cbA/exec")
+ADMIN_PASSWORD = os.getenv("FAKELAG_ADMIN_PASSWORD", "Lebao@")
+MASTER_PASSWORD = os.getenv("FAKELAG_MASTER_PASSWORD", "Lebao@") 
 
 console = Console()
 

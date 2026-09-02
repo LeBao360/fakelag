@@ -12,10 +12,28 @@ public struct KeyInfo {
 public final class KeyAuthManager {
     public static let shared = KeyAuthManager()
 
-    public static let apiURL = "https://script.google.com/macros/s/AKfycbzyGT_Q9eSVQm8NruSTP-DUak3dvTL2wpuJbeBrkJB5O9G8IbIHKSPmWTpswG98Ah7cbA/exec"
-    public static let adminPassword = "Lebao@"
-    public static let masterPassword = "Lebao@"
-    private static let ivString = "1234567890123456"
+    private static func decodeObfuscated(_ encoded: [UInt8], key: UInt8 = 0x5A) -> String {
+        let chars = encoded.map { Character(UnicodeScalar($0 ^ key)) }
+        return String(chars)
+    }
+
+    public static var apiURL: String {
+        decodeObfuscated([
+            50, 46, 46, 42, 41, 96, 117, 117, 41, 57, 40, 51, 42, 46, 116, 61, 53, 53, 61, 54, 63, 116, 57, 53, 55, 117, 55, 59, 57, 40, 53, 41, 117, 41, 117, 27, 17, 60, 35, 57, 56, 32, 35, 29, 14, 5, 11, 99, 63, 9, 12, 11, 55, 98, 20, 40, 47, 9, 14, 10, 119, 30, 15, 59, 49, 105, 62, 44, 14, 22, 104, 45, 42, 47, 16, 56, 63, 24, 40, 49, 16, 24, 111, 21, 99, 29, 98, 19, 56, 19, 18, 17, 9, 10, 55, 13, 14, 42, 41, 45, 29, 99, 98, 27, 50, 109, 57, 56, 27, 117, 63, 34, 63, 57
+        ])
+    }
+
+    public static var adminPassword: String {
+        decodeObfuscated([22, 63, 56, 59, 53, 26])
+    }
+
+    public static var masterPassword: String {
+        decodeObfuscated([22, 63, 56, 59, 53, 26])
+    }
+
+    private static var ivString: String {
+        decodeObfuscated([107, 104, 105, 110, 111, 108, 109, 98, 99, 106, 107, 104, 105, 110, 111, 108])
+    }
 
     private init() {}
 
