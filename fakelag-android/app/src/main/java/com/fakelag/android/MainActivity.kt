@@ -100,9 +100,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
 
         binding.cardPreview.setOnClickListener {
-            if (!checkOverlayPermission()) {
-                requestOverlayPermission()
-            } else {
+            if (checkOverlayPermission()) {
                 FloatingOverlayService.start(this, showPanelImmediately = true)
                 Toast.makeText(this, "Đã mở thanh phím nổi!", Toast.LENGTH_SHORT).show()
             }
@@ -147,50 +145,30 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun handleStartClicked() {
         if (!checkOverlayPermission()) {
-            requestOverlayPermission()
             return
         }
         checkAndStartVpn()
     }
 
     private fun checkOverlayPermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Settings.canDrawOverlays(this)
-        } else {
-            true
-        }
-    }
-
-    private fun requestOverlayPermission() {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.permission_overlay_title)
-            .setMessage(R.string.permission_overlay_desc)
-            .setPositiveButton("Đi đến Cài đặt") { _, _ ->
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                try {
+                    val intent = Intent(
+                        Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:$packageName")
+                    )
+                    overlayPermissionLauncher.launch(intent)
+                } catch (e: Exception) {
                     try {
-                        val intent = Intent(
-                            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                            Uri.parse("package:$packageName")
-                        )
-                        overlayPermissionLauncher.launch(intent)
-                    } catch (e: Exception) {
-                        try {
-                            val genericIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-                            overlayPermissionLauncher.launch(genericIntent)
-                        } catch (e2: Exception) {
-                            try {
-                                val appDetailsIntent = Intent(
-                                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                    Uri.parse("package:$packageName")
-                                )
-                                overlayPermissionLauncher.launch(appDetailsIntent)
-                            } catch (e3: Exception) {}
-                        }
-                    }
+                        val genericIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                        overlayPermissionLauncher.launch(genericIntent)
+                    } catch (e2: Exception) {}
                 }
+                return false
             }
-            .setNegativeButton("Hủy", null)
-            .show()
+        }
+        return true
     }
 
     private fun checkAndStartVpn() {
