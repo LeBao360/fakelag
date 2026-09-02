@@ -167,21 +167,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             .setMessage(R.string.permission_overlay_desc)
             .setPositiveButton("Đi đến Cài đặt") { _, _ ->
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    val isXiaomi = Build.MANUFACTURER.contains("xiaomi", ignoreCase = true) ||
-                                   Build.BRAND.contains("redmi", ignoreCase = true) ||
-                                   Build.BRAND.contains("poco", ignoreCase = true)
-
-                    if (isXiaomi) {
-                        try {
-                            val miuiIntent = Intent("miui.intent.action.APP_PERM_EDITOR").apply {
-                                setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.PermissionsEditorActivity")
-                                putExtra("extra_pkgname", packageName)
-                            }
-                            overlayPermissionLauncher.launch(miuiIntent)
-                            return@setPositiveButton
-                        } catch (e: Exception) {}
-                    }
-
                     try {
                         val intent = Intent(
                             Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -192,7 +177,15 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                         try {
                             val genericIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
                             overlayPermissionLauncher.launch(genericIntent)
-                        } catch (e2: Exception) {}
+                        } catch (e2: Exception) {
+                            try {
+                                val appDetailsIntent = Intent(
+                                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                    Uri.parse("package:$packageName")
+                                )
+                                overlayPermissionLauncher.launch(appDetailsIntent)
+                            } catch (e3: Exception) {}
+                        }
                     }
                 }
             }
