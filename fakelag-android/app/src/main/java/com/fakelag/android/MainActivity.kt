@@ -160,9 +160,33 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun requestOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Toast.makeText(this, "Vui lòng gạt BẬT quyền hiển thị cho FakeLag", Toast.LENGTH_SHORT).show()
+            val isXiaomi = Build.MANUFACTURER.contains("xiaomi", ignoreCase = true) ||
+                           Build.BRAND.contains("redmi", ignoreCase = true) ||
+                           Build.BRAND.contains("poco", ignoreCase = true)
+
+            Toast.makeText(this, "Vui lòng chọn FakeLag và gạt BẬT quyền hiển thị", Toast.LENGTH_LONG).show()
+
+            if (isXiaomi) {
+                // On Xiaomi / HyperOS: Standard ACTION_MANAGE_OVERLAY_PERMISSION opens the special access list directly
+                try {
+                    val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                    overlayPermissionLauncher.launch(intent)
+                    return
+                } catch (e: Exception) {
+                    // Fallback to App Details if needed
+                    try {
+                        val appDetails = Intent(
+                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            Uri.parse("package:$packageName")
+                        )
+                        overlayPermissionLauncher.launch(appDetails)
+                        return
+                    } catch (e2: Exception) {}
+                }
+            }
+
             try {
-                // 1. Direct standard package intent (Opens direct toggle switch for FakeLag)
+                // Standard Android direct package intent
                 val intent = Intent(
                     Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                     Uri.parse("package:$packageName")
@@ -170,25 +194,16 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 overlayPermissionLauncher.launch(intent)
             } catch (e1: Exception) {
                 try {
-                    // 2. Xiaomi / MIUI / HyperOS specific permission editor
-                    val miuiIntent = Intent("miui.intent.action.APP_PERM_EDITOR").apply {
-                        setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.PermissionsEditorActivity")
-                        putExtra("extra_pkgname", packageName)
-                    }
-                    overlayPermissionLauncher.launch(miuiIntent)
+                    val genericIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                    overlayPermissionLauncher.launch(genericIntent)
                 } catch (e2: Exception) {
                     try {
-                        // 3. Fallback to App Info settings page
                         val appDetailsIntent = Intent(
                             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                             Uri.parse("package:$packageName")
                         )
                         overlayPermissionLauncher.launch(appDetailsIntent)
-                    } catch (e3: Exception) {
-                        // 4. Fallback to generic overlay list
-                        val genericIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-                        overlayPermissionLauncher.launch(genericIntent)
-                    }
+                    } catch (e3: Exception) {}
                 }
             }
         }
