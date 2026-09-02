@@ -1,0 +1,40 @@
+name: Build iOS IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build FakeLag iOS
+        run: |
+          cd fakelag-ios
+          xcodebuild -project FakeLag.xcodeproj \
+                     -scheme FakeLag \
+                     -configuration Release \
+                     -sdk iphoneos \
+                     -destination 'generic/platform=iOS' \
+                     CODE_SIGNING_ALLOWED=NO \
+                     CODE_SIGNING_REQUIRED=NO \
+                     CODE_SIGN_IDENTITY="" \
+                     clean build
+
+      - name: Create IPA Package
+        run: |
+          cd fakelag-ios
+          mkdir -p Payload
+          cp -r build/Release-iphoneos/FakeLag.app Payload/
+          zip -r FakeLag.ipa Payload
+          mkdir -p output
+          mv FakeLag.ipa output/
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: FakeLag-iOS-IPA
+          path: fakelag-ios/output/FakeLag.ipa
