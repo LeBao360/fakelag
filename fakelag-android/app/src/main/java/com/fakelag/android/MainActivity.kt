@@ -208,7 +208,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     private fun startServices() {
-        FloatingOverlayService.start(this, showPanelImmediately = true)
+        FloatingOverlayService.start(this, showPanelImmediately = false)
         LagVpnService.start(this)
         settingsManager.isServiceRunning = true
         Toast.makeText(this, "FakeLag đã bật!", Toast.LENGTH_SHORT).show()
