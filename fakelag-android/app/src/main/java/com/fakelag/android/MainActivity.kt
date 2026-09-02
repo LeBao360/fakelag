@@ -1,12 +1,15 @@
 package com.fakelag.android
 
 import android.app.Activity
+import android.app.AppOpsManager
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.net.VpnService
 import android.os.Build
 import android.os.Bundle
+import android.os.Process
 import android.provider.Settings
 import android.view.KeyEvent
 import android.widget.Toast
@@ -144,18 +147,40 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun handleStartClicked() {
         if (!checkOverlayPermission()) {
-            requestOverlayPermission()
+            AlertDialog.Builder(this)
+                .setTitle("CẤP QUYỀN CỬA SỔ NỔI")
+                .setMessage("Để hiện nút TELE và LAG khi chơi game, vui lòng cấp quyền hiển thị nổi.\n\n(Lưu ý trên Xiaomi/Redmi: Nếu bạn đã bật trong 'Quyền khác', bạn có thể nhấn 'Vẫn Bật Nút' để chạy ngay).")
+                .setPositiveButton("Mở Cài Đặt Quyền") { _, _ ->
+                    requestOverlayPermission()
+                }
+                .setNeutralButton("Vẫn Bật Nút") { _, _ ->
+                    checkAndStartVpn()
+                }
+                .setNegativeButton("Hủy", null)
+                .show()
             return
         }
         checkAndStartVpn()
     }
 
     private fun checkOverlayPermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Settings.canDrawOverlays(this)
-        } else {
-            true
-        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return true
+        if (Settings.canDrawOverlays(this)) return true
+
+        // Check AppOps for Xiaomi / MIUI / HyperOS
+        try {
+            val appOpsMgr = getSystemService(Context.APP_OPS_SERVICE) as? android.app.AppOpsManager
+            if (appOpsMgr != null) {
+                val mode = appOpsMgr.checkOpNoThrow(
+                    android.app.AppOpsManager.OPSTR_SYSTEM_ALERT_WINDOW,
+                    android.os.Process.myUid(),
+                    packageName
+                )
+                if (mode == android.app.AppOpsManager.MODE_ALLOWED) return true
+            }
+        } catch (e: Exception) {}
+
+        return false
     }
 
     private fun requestOverlayPermission() {
