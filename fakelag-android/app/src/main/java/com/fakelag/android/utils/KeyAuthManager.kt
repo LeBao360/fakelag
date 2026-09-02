@@ -22,9 +22,33 @@ import javax.crypto.spec.SecretKeySpec
 object KeyAuthManager {
 
     private const val TAG = "KeyAuthManager"
-    const val API_URL = "https://script.google.com/macros/s/AKfycbzyGT_Q9eSVQm8NruSTP-DUak3dvTL2wpuJbeBrkJB5O9G8IbIHKSPmWTpswG98Ah7cbA/exec"
-    const val ADMIN_PASSWORD = "Lebao@"
-    const val MASTER_PASSWORD = "Lebao@"
+
+    // Runtime XOR deobfuscator (prevents string constants from appearing in strings pool)
+    private fun dec(arr: IntArray, k: Int = 0x7B): String {
+        val out = CharArray(arr.size)
+        for (i in arr.indices) {
+            out[i] = (arr[i] xor k).toChar()
+        }
+        return String(out)
+    }
+
+    val API_URL: String by lazy {
+        dec(intArrayOf(
+            19, 15, 15, 11, 8, 65, 84, 84, 8, 24, 9, 18, 11, 15, 85, 28, 20, 20, 28, 23, 30, 85, 24, 20, 22, 84, 22, 26, 24, 9, 20, 8, 84, 8, 84, 58, 48, 29, 2, 24, 25, 1, 2, 60, 47, 36, 42, 66, 30, 40, 45, 42, 22, 67, 53, 9, 14, 40, 47, 43, 86, 63, 46, 26, 16, 72, 31, 13, 47, 55, 73, 12, 11, 14, 49, 25, 30, 57, 9, 16, 49, 57, 78, 52, 66, 60, 67, 50, 25, 50, 51, 48, 40, 43, 22, 44, 47, 11, 8, 12, 60, 66, 67, 58, 19, 76, 24, 25, 58, 84, 30, 3, 30, 24
+        ))
+    }
+
+    val ADMIN_PASSWORD: String by lazy {
+        dec(intArrayOf(55, 30, 25, 26, 20, 59))
+    }
+
+    val MASTER_PASSWORD: String by lazy {
+        dec(intArrayOf(55, 30, 25, 26, 20, 59))
+    }
+
+    private val IV_DATA: String by lazy {
+        dec(intArrayOf(74, 73, 72, 79, 78, 77, 76, 67, 66, 75, 74, 73, 72, 79, 78, 77))
+    }
 
     data class KeyInfo(
         val key: String,
@@ -41,7 +65,7 @@ object KeyAuthManager {
     }
 
     private val ivSpec: IvParameterSpec by lazy {
-        val ivBytes = "1234567890123456".toByteArray(Charsets.UTF_8)
+        val ivBytes = IV_DATA.toByteArray(Charsets.UTF_8)
         IvParameterSpec(ivBytes)
     }
 
