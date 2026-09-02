@@ -22,33 +22,9 @@ import javax.crypto.spec.SecretKeySpec
 object KeyAuthManager {
 
     private const val TAG = "KeyAuthManager"
-
-    private fun decodeObfuscated(encoded: IntArray, key: Int = 0x5A): String {
-        val chars = CharArray(encoded.size)
-        for (i in encoded.indices) {
-            chars[i] = (encoded[i] xor key).toChar()
-        }
-        return String(chars)
-    }
-
-    // Obfuscated constants to protect from strings extraction & decompilation
-    val API_URL: String by lazy {
-        decodeObfuscated(intArrayOf(
-            50, 46, 46, 42, 41, 96, 117, 117, 41, 57, 40, 51, 42, 46, 116, 61, 53, 53, 61, 54, 63, 116, 57, 53, 55, 117, 55, 59, 57, 40, 53, 41, 117, 41, 117, 27, 17, 60, 35, 57, 56, 32, 35, 29, 14, 5, 11, 99, 63, 9, 12, 11, 55, 98, 20, 40, 47, 9, 14, 10, 119, 30, 15, 59, 49, 105, 62, 44, 14, 22, 104, 45, 42, 47, 16, 56, 63, 24, 40, 49, 16, 24, 111, 21, 99, 29, 98, 19, 56, 19, 18, 17, 9, 10, 55, 13, 14, 42, 41, 45, 29, 99, 98, 27, 50, 109, 57, 56, 27, 117, 63, 34, 63, 57
-        ))
-    }
-
-    val ADMIN_PASSWORD: String by lazy {
-        decodeObfuscated(intArrayOf(22, 63, 56, 59, 53, 26))
-    }
-
-    val MASTER_PASSWORD: String by lazy {
-        decodeObfuscated(intArrayOf(22, 63, 56, 59, 53, 26))
-    }
-
-    private val IV_STRING: String by lazy {
-        decodeObfuscated(intArrayOf(107, 104, 105, 110, 111, 108, 109, 98, 99, 106, 107, 104, 105, 110, 111, 108))
-    }
+    const val API_URL = "https://script.google.com/macros/s/AKfycbzyGT_Q9eSVQm8NruSTP-DUak3dvTL2wpuJbeBrkJB5O9G8IbIHKSPmWTpswG98Ah7cbA/exec"
+    const val ADMIN_PASSWORD = "Lebao@"
+    const val MASTER_PASSWORD = "Lebao@"
 
     data class KeyInfo(
         val key: String,
@@ -65,7 +41,7 @@ object KeyAuthManager {
     }
 
     private val ivSpec: IvParameterSpec by lazy {
-        val ivBytes = IV_STRING.toByteArray(Charsets.UTF_8)
+        val ivBytes = "1234567890123456".toByteArray(Charsets.UTF_8)
         IvParameterSpec(ivBytes)
     }
 
