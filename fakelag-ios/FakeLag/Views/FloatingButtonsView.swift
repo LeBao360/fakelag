@@ -4,8 +4,15 @@ public struct FloatingButtonsView: View {
     @ObservedObject var settings = SettingsManager.shared
     @ObservedObject var vpnManager = LagVpnManager.shared
 
-    @State private var teleOffset: CGSize = CGSize(width: 260, height: 180)
-    @State private var lagOffset: CGSize = CGSize(width: 260, height: 260)
+    @State private var telePosition: CGPoint = CGPoint(
+        x: UIScreen.main.bounds.width - 45,
+        y: UIScreen.main.bounds.height * 0.35
+    )
+    @State private var lagPosition: CGPoint = CGPoint(
+        x: UIScreen.main.bounds.width - 45,
+        y: UIScreen.main.bounds.height * 0.35 + 75
+    )
+
     @State private var tempTeleDrag: CGSize = .zero
     @State private var tempLagDrag: CGSize = .zero
 
@@ -29,7 +36,7 @@ public struct FloatingButtonsView: View {
                                 LinearGradient(colors: [Color(red: 0.7, green: 0.15, blue: 1.0), Color(red: 0.44, green: 0.0, blue: 1.0)], startPoint: .top, endPoint: .bottom)
                             )
                             .overlay(Circle().stroke(vpnManager.isTeleActive ? Color(red: 1.0, green: 0.16, blue: 0.33) : Color(red: 0.7, green: 0.15, blue: 1.0), lineWidth: 2))
-                            .shadow(color: Color.purple.opacity(0.6), radius: 8)
+                            .shadow(color: Color.purple.opacity(0.8), radius: 10)
 
                         if vpnManager.isTeleActive {
                             Text(String(format: "%.1fs", vpnManager.teleRemainingSeconds))
@@ -49,7 +56,10 @@ public struct FloatingButtonsView: View {
                     .frame(width: settings.iconSizeDp, height: settings.iconSizeDp)
                     .opacity(buttonOpacity)
                 }
-                .position(x: teleOffset.width + tempTeleDrag.width, y: teleOffset.height + tempTeleDrag.height)
+                .position(
+                    x: telePosition.x + tempTeleDrag.width,
+                    y: telePosition.y + tempTeleDrag.height
+                )
                 .gesture(
                     DragGesture()
                         .onChanged { val in
@@ -59,8 +69,8 @@ public struct FloatingButtonsView: View {
                         }
                         .onEnded { val in
                             if !settings.isLockPosition {
-                                teleOffset.width += val.translation.width
-                                teleOffset.height += val.translation.height
+                                telePosition.x += val.translation.width
+                                telePosition.y += val.translation.height
                                 tempTeleDrag = .zero
                             }
                         }
@@ -84,7 +94,7 @@ public struct FloatingButtonsView: View {
                                 LinearGradient(colors: [Color(red: 0.0, green: 0.82, blue: 1.0), Color(red: 0.0, green: 0.4, blue: 1.0)], startPoint: .top, endPoint: .bottom)
                             )
                             .overlay(Circle().stroke(vpnManager.isLagActive ? Color(red: 1.0, green: 0.3, blue: 0.3) : Color(red: 0.0, green: 0.82, blue: 1.0), lineWidth: 2))
-                            .shadow(color: Color.blue.opacity(0.6), radius: 8)
+                            .shadow(color: Color.blue.opacity(0.8), radius: 10)
 
                         if vpnManager.isLagActive {
                             Text(String(format: "%.1fs", vpnManager.lagRemainingSeconds))
@@ -104,7 +114,10 @@ public struct FloatingButtonsView: View {
                     .frame(width: settings.iconSizeDp, height: settings.iconSizeDp)
                     .opacity(buttonOpacity)
                 }
-                .position(x: lagOffset.width + tempLagDrag.width, y: lagOffset.height + tempLagDrag.height)
+                .position(
+                    x: lagPosition.x + tempLagDrag.width,
+                    y: lagPosition.y + tempLagDrag.height
+                )
                 .gesture(
                     DragGesture()
                         .onChanged { val in
@@ -114,8 +127,8 @@ public struct FloatingButtonsView: View {
                         }
                         .onEnded { val in
                             if !settings.isLockPosition {
-                                lagOffset.width += val.translation.width
-                                lagOffset.height += val.translation.height
+                                lagPosition.x += val.translation.width
+                                lagPosition.y += val.translation.height
                                 tempLagDrag = .zero
                             }
                         }
@@ -127,5 +140,6 @@ public struct FloatingButtonsView: View {
                 )
             }
         }
+        .zIndex(999)
     }
 }

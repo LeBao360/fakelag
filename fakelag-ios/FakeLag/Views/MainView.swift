@@ -208,17 +208,23 @@ public struct MainView: View {
                 }
             }
 
-            // Floating Buttons Overlay Layer
-            if settings.isServiceRunning {
-                FloatingButtonsView()
-            }
-
             // Floating Settings Menu Overlay Layer
             if settings.isPanelShowing {
                 FloatingOverlayView(onClose: {
                     settings.isPanelShowing = false
                 })
+                .zIndex(100)
             }
+
+            // Floating Buttons Overlay Layer (Always on top of everything)
+            if settings.isServiceRunning {
+                FloatingButtonsView()
+                    .zIndex(999)
+            }
+        }
+        .onAppear {
+            settings.isServiceRunning = true
+            VolumeButtonObserver.shared.startListening()
         }
         .alert(isPresented: $showLogoutAlert) {
             Alert(
