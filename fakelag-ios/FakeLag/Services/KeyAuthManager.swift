@@ -5,7 +5,7 @@ import UIKit
 public struct KeyInfo {
     public let key: String
     public let expiry: String
-    public let isValid: Boolean
+    public let isValid: Bool
     public let message: String
 }
 
@@ -22,7 +22,7 @@ public final class KeyAuthManager {
     // MARK: - AES Cryptography (CBC / PKCS7)
     public func encrypt(raw: String) -> String {
         guard let data = raw.data(using: .utf8) else { return "" }
-        guard let keyData = sha256(masterPassword) else { return "" }
+        guard let keyData = sha256(KeyAuthManager.masterPassword) else { return "" }
         guard let ivData = KeyAuthManager.ivString.data(using: .utf8) else { return "" }
 
         let bufferSize = data.count + kCCBlockSizeAES128
@@ -66,7 +66,7 @@ public final class KeyAuthManager {
             base64.append("=")
         }
         guard let data = Data(base64Encoded: base64) else { return "Decryption Error" }
-        guard let keyData = sha256(masterPassword) else { return "Decryption Error" }
+        guard let keyData = sha256(KeyAuthManager.masterPassword) else { return "Decryption Error" }
         guard let ivData = KeyAuthManager.ivString.data(using: .utf8) else { return "Decryption Error" }
 
         let bufferSize = data.count + kCCBlockSizeAES128
