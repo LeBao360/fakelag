@@ -52,7 +52,9 @@ class LagVpnService : VpnService() {
         val action = intent?.action
         when (action) {
             ACTION_START -> {
-                startForeground(NOTIFICATION_ID, createSilentNotification("NOVA FAKE LAG Sẵn sàng"))
+                try {
+                    startForeground(NOTIFICATION_ID, createSilentNotification("NOVA FAKE LAG Sẵn sàng"))
+                } catch (ignored: Throwable) {}
                 isRunning.set(true)
                 stopVpnInterface()
                 checkAutoLag()

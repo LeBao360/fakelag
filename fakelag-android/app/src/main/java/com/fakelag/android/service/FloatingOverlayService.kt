@@ -88,24 +88,34 @@ class FloatingOverlayService : Service() {
         try {
             createNotificationChannel()
             startForeground(NOTIFICATION_ID, createNotification())
-        } catch (e: Exception) {
-            Log.e(TAG, "Foreground service error: ${e.message}")
+        } catch (ignored: Throwable) {
+            Log.e(TAG, "startForeground ignored: ${ignored.message}")
         }
 
         // Register Separate Receivers
-        val filterTele = IntentFilter(LagVpnService.BROADCAST_TELE_STATE)
-        val filterLag = IntentFilter(LagVpnService.BROADCAST_LAG_STATE)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(teleStateReceiver, filterTele, RECEIVER_NOT_EXPORTED)
-            registerReceiver(lagStateReceiver, filterLag, RECEIVER_NOT_EXPORTED)
-        } else {
-            registerReceiver(teleStateReceiver, filterTele)
-            registerReceiver(lagStateReceiver, filterLag)
-        }
+        try {
+            val filterTele = IntentFilter(LagVpnService.BROADCAST_TELE_STATE)
+            val filterLag = IntentFilter(LagVpnService.BROADCAST_LAG_STATE)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                registerReceiver(teleStateReceiver, filterTele, RECEIVER_NOT_EXPORTED)
+                registerReceiver(lagStateReceiver, filterLag, RECEIVER_NOT_EXPORTED)
+            } else {
+                registerReceiver(teleStateReceiver, filterTele)
+                registerReceiver(lagStateReceiver, filterLag)
+            }
+        } catch (ignored: Throwable) {}
 
-        initTeleFloatingButton()
-        initLagFloatingButton()
-        initSettingsPanel()
+        try {
+            initTeleFloatingButton()
+        } catch (ignored: Throwable) {}
+
+        try {
+            initLagFloatingButton()
+        } catch (ignored: Throwable) {}
+
+        try {
+            initSettingsPanel()
+        } catch (ignored: Throwable) {}
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
