@@ -159,20 +159,39 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     private fun requestOverlayPermission() {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.permission_overlay_title)
-            .setMessage(R.string.permission_overlay_desc)
-            .setPositiveButton("Đi đến Cài đặt") { _, _ ->
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    val intent = Intent(
-                        Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                        Uri.parse("package:$packageName")
-                    )
-                    overlayPermissionLauncher.launch(intent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Toast.makeText(this, "Vui lòng gạt BẬT quyền hiển thị cho FakeLag", Toast.LENGTH_SHORT).show()
+            try {
+                // 1. Direct standard package intent (Opens direct toggle switch for FakeLag)
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName")
+                )
+                overlayPermissionLauncher.launch(intent)
+            } catch (e1: Exception) {
+                try {
+                    // 2. Xiaomi / MIUI / HyperOS specific permission editor
+                    val miuiIntent = Intent("miui.intent.action.APP_PERM_EDITOR").apply {
+                        setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.PermissionsEditorActivity")
+                        putExtra("extra_pkgname", packageName)
+                    }
+                    overlayPermissionLauncher.launch(miuiIntent)
+                } catch (e2: Exception) {
+                    try {
+                        // 3. Fallback to App Info settings page
+                        val appDetailsIntent = Intent(
+                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            Uri.parse("package:$packageName")
+                        )
+                        overlayPermissionLauncher.launch(appDetailsIntent)
+                    } catch (e3: Exception) {
+                        // 4. Fallback to generic overlay list
+                        val genericIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                        overlayPermissionLauncher.launch(genericIntent)
+                    }
                 }
             }
-            .setNegativeButton("Hủy", null)
-            .show()
+        }
     }
 
     private fun checkAndStartVpn() {
