@@ -147,91 +147,42 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun handleStartClicked() {
         if (!checkOverlayPermission()) {
-            AlertDialog.Builder(this)
-                .setTitle("CẤP QUYỀN CỬA SỔ NỔI")
-                .setMessage("Để hiện nút TELE và LAG khi chơi game, vui lòng cấp quyền hiển thị nổi.\n\n(Lưu ý trên Xiaomi/Redmi: Nếu bạn đã bật trong 'Quyền khác', bạn có thể nhấn 'Vẫn Bật Nút' để chạy ngay).")
-                .setPositiveButton("Mở Cài Đặt Quyền") { _, _ ->
-                    requestOverlayPermission()
-                }
-                .setNeutralButton("Vẫn Bật Nút") { _, _ ->
-                    checkAndStartVpn()
-                }
-                .setNegativeButton("Hủy", null)
-                .show()
+            requestOverlayPermission()
             return
         }
         checkAndStartVpn()
     }
 
     private fun checkOverlayPermission(): Boolean {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return true
-        if (Settings.canDrawOverlays(this)) return true
-
-        // Check AppOps for Xiaomi / MIUI / HyperOS
-        try {
-            val appOpsMgr = getSystemService(Context.APP_OPS_SERVICE) as? android.app.AppOpsManager
-            if (appOpsMgr != null) {
-                val mode = appOpsMgr.checkOpNoThrow(
-                    android.app.AppOpsManager.OPSTR_SYSTEM_ALERT_WINDOW,
-                    android.os.Process.myUid(),
-                    packageName
-                )
-                if (mode == android.app.AppOpsManager.MODE_ALLOWED) return true
-            }
-        } catch (e: Exception) {}
-
-        return false
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Settings.canDrawOverlays(this)
+        } else {
+            true
+        }
     }
 
     private fun requestOverlayPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val isXiaomi = Build.MANUFACTURER.contains("xiaomi", ignoreCase = true) ||
-                           Build.BRAND.contains("redmi", ignoreCase = true) ||
-                           Build.BRAND.contains("poco", ignoreCase = true)
-
-            Toast.makeText(this, "Vui lòng chọn FakeLag và gạt BẬT quyền hiển thị", Toast.LENGTH_LONG).show()
-
-            if (isXiaomi) {
-                // On Xiaomi / HyperOS: Standard ACTION_MANAGE_OVERLAY_PERMISSION opens the special access list directly
-                try {
-                    val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-                    overlayPermissionLauncher.launch(intent)
-                    return
-                } catch (e: Exception) {
-                    // Fallback to App Details if needed
+        AlertDialog.Builder(this)
+            .setTitle(R.string.permission_overlay_title)
+            .setMessage(R.string.permission_overlay_desc)
+            .setPositiveButton("Đi đến Cài đặt") { _, _ ->
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     try {
-                        val appDetails = Intent(
-                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        val intent = Intent(
+                            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                             Uri.parse("package:$packageName")
                         )
-                        overlayPermissionLauncher.launch(appDetails)
-                        return
-                    } catch (e2: Exception) {}
+                        overlayPermissionLauncher.launch(intent)
+                    } catch (e: Exception) {
+                        try {
+                            val genericIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                            overlayPermissionLauncher.launch(genericIntent)
+                        } catch (e2: Exception) {}
+                    }
                 }
             }
-
-            try {
-                // Standard Android direct package intent
-                val intent = Intent(
-                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                    Uri.parse("package:$packageName")
-                )
-                overlayPermissionLauncher.launch(intent)
-            } catch (e1: Exception) {
-                try {
-                    val genericIntent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-                    overlayPermissionLauncher.launch(genericIntent)
-                } catch (e2: Exception) {
-                    try {
-                        val appDetailsIntent = Intent(
-                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                            Uri.parse("package:$packageName")
-                        )
-                        overlayPermissionLauncher.launch(appDetailsIntent)
-                    } catch (e3: Exception) {}
-                }
-            }
-        }
+            .setNegativeButton("Hủy", null)
+            .show()
     }
 
     private fun checkAndStartVpn() {
