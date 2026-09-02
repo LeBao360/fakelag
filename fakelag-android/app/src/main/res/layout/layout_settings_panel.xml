@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:letterSpacing="0.04"
-            android:text="NOVA FAKE LAG PRO"
+            android:text="NOVA FAKE LAG"
             android:textColor="@color/neon_blue"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -323,6 +323,18 @@
             android:textSize="12sp" />
 
         <CheckBox
+            android:id="@+id/chkShowTele2"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:buttonTint="@color/bright_red"
+            android:checked="true"
+            android:drawableStart="@drawable/bi_eye_fill"
+            android:drawablePadding="8dp"
+            android:text="Bật Antiban Xóa Tố Cáo"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <CheckBox
             android:id="@+id/chkShowLag"
             android:layout_width="match_parent"
             android:layout_height="28dp"
@@ -444,7 +456,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kéo tiêu đề để di chuyển • Kéo góc ⤢ hoặc chụm 2 ngón để thu phóng"
+            android:text="chơi đừng sĩ gái là không ban nhen"
             android:textColor="@color/text_subtitle"
             android:textSize="9sp" />
     </LinearLayout>

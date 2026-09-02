@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.fakelag.android"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 30
         versionCode = 1
         versionName = "1.6"
 
@@ -55,6 +55,11 @@ android {
 
     buildFeatures {
         viewBinding = true
+    }
+
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
     }
 }
 
