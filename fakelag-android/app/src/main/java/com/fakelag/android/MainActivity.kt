@@ -152,7 +152,16 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun checkOverlayPermission(): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val isVivo = Build.MANUFACTURER.contains("vivo", ignoreCase = true) ||
+                         Build.BRAND.contains("vivo", ignoreCase = true) ||
+                         Build.BRAND.contains("iqoo", ignoreCase = true)
+
             if (!Settings.canDrawOverlays(this)) {
+                if (isVivo) {
+                    openVivoPermission()
+                    return false
+                }
+
                 try {
                     val intent = Intent(
                         Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -169,6 +178,24 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
         }
         return true
+    }
+
+    private fun openVivoPermission() {
+        Toast.makeText(this, "Vui lòng chọn FakeLag và gạt BẬT 'Cửa sổ nổi'", Toast.LENGTH_LONG).show()
+        val vivoIntents = arrayOf(
+            Intent().setClassName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.FloatWindowManager"),
+            Intent().setClassName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.PurviewTabActivity"),
+            Intent().setClassName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.SoftPermissionDetailActivity").putExtra("packagename", packageName),
+            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")),
+            Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+        )
+
+        for (intent in vivoIntents) {
+            try {
+                overlayPermissionLauncher.launch(intent)
+                return
+            } catch (e: Exception) {}
+        }
     }
 
     private fun checkAndStartVpn() {

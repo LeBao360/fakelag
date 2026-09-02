@@ -357,7 +357,7 @@ class LagVpnService : VpnService() {
     companion object {
         private const val TAG = "LagVpnService"
         const val CHANNEL_ID = "fakelag_silent_channel"
-        const val NOTIFICATION_ID = 1001
+        const val NOTIFICATION_ID = 2002
 
         const val ACTION_START = "com.fakelag.android.action.START"
         const val ACTION_STOP = "com.fakelag.android.action.STOP"

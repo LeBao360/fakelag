@@ -183,6 +183,9 @@ class FloatingOverlayService : Service() {
         )
 
         try {
+            if (teleFloatingView?.parent != null) {
+                windowManager.removeView(teleFloatingView)
+            }
             windowManager.addView(teleFloatingView, teleLayoutParams)
             applyButtonSizeAndOpacity()
         } catch (e: Exception) {
@@ -246,6 +249,9 @@ class FloatingOverlayService : Service() {
         )
 
         try {
+            if (lagFloatingView?.parent != null) {
+                windowManager.removeView(lagFloatingView)
+            }
             windowManager.addView(lagFloatingView, lagLayoutParams)
             applyButtonSizeAndOpacity()
         } catch (e: Exception) {
@@ -806,6 +812,9 @@ class FloatingOverlayService : Service() {
         try {
             setupPanelControls()
             applyPanelScale(settingsManager.panelScalePercent)
+            if (settingsPanelView?.parent != null) {
+                windowManager.removeView(settingsPanelView)
+            }
             windowManager.addView(settingsPanelView, panelLayoutParams)
             isPanelShowing = true
         } catch (e: Exception) {
