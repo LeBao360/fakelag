@@ -17,154 +17,195 @@ public struct MainView: View {
         ZStack {
             Color(red: 0.05, green: 0.06, blue: 0.09).ignoresSafeArea()
 
-            VStack(spacing: 16) {
-                // Top Header
-                VStack(spacing: 6) {
-                    Text("⚡ NOVA FAKE LAG PRO")
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
-                        .foregroundColor(Color(red: 0.0, green: 0.82, blue: 1.0))
-                        .tracking(2)
+            ScrollView {
+                VStack(spacing: 14) {
+                    // Top Header
+                    VStack(spacing: 6) {
+                        Text("⚡ NOVA FAKE LAG PRO")
+                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                            .foregroundColor(Color(red: 0.0, green: 0.82, blue: 1.0))
+                            .tracking(2)
 
-                    Text("ASSISTANT FOR FREE FIRE & GAMING (IOS)")
-                        .font(.system(size: 10, weight: .semibold))
-                        .foregroundColor(Color(red: 0.55, green: 0.58, blue: 0.7))
+                        Text("ASSISTANT FOR FREE FIRE & GAMING (IOS)")
+                            .font(.system(size: 10, weight: .semibold))
+                            .foregroundColor(Color(red: 0.55, green: 0.58, blue: 0.7))
 
-                    // License Badge Row
-                    HStack(spacing: 6) {
-                        Image(systemName: "key.fill")
-                            .foregroundColor(Color(red: 1.0, green: 0.84, blue: 0.0))
-                            .font(.system(size: 11))
+                        // License Badge Row
+                        HStack(spacing: 6) {
+                            Image(systemName: "key.fill")
+                                .foregroundColor(Color(red: 1.0, green: 0.84, blue: 0.0))
+                                .font(.system(size: 11))
 
-                        Text(settings.licenseExpiry.isEmpty ? "VIP: Vĩnh viễn (LIFETIME)" : settings.licenseExpiry)
-                            .font(.system(size: 11, weight: .bold))
-                            .foregroundColor(Color(red: 1.0, green: 0.84, blue: 0.0))
-
-                        Button(action: { showLogoutAlert = true }) {
-                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                            Text(settings.licenseExpiry.isEmpty ? "VIP: Vĩnh viễn (LIFETIME)" : settings.licenseExpiry)
                                 .font(.system(size: 11, weight: .bold))
-                                .foregroundColor(Color(red: 1.0, green: 0.16, blue: 0.33))
-                                .padding(4)
-                                .background(Color(red: 0.14, green: 0.16, blue: 0.25))
-                                .cornerRadius(4)
+                                .foregroundColor(Color(red: 1.0, green: 0.84, blue: 0.0))
+
+                            Button(action: { showLogoutAlert = true }) {
+                                Image(systemName: "rectangle.portrait.and.arrow.right")
+                                    .font(.system(size: 11, weight: .bold))
+                                    .foregroundColor(Color(red: 1.0, green: 0.16, blue: 0.33))
+                                    .padding(4)
+                                    .background(Color(red: 0.14, green: 0.16, blue: 0.25))
+                                    .cornerRadius(4)
+                            }
                         }
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(Color(red: 0.12, green: 0.14, blue: 0.22))
+                        .cornerRadius(8)
                     }
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(Color(red: 0.12, green: 0.14, blue: 0.22))
-                    .cornerRadius(8)
-                }
-                .padding(.top, 10)
+                    .padding(.top, 8)
 
-                // Preview Card
-                VStack(spacing: 12) {
-                    Text("BẢNG ĐIỀU KHIỂN NỔI GAMING")
-                        .font(.system(size: 11, weight: .bold))
-                        .foregroundColor(Color(red: 0.55, green: 0.58, blue: 0.7))
+                    // Preview Card
+                    VStack(spacing: 12) {
+                        Text("BẢNG ĐIỀU KHIỂN NỔI GAMING")
+                            .font(.system(size: 11, weight: .bold))
+                            .foregroundColor(Color(red: 0.55, green: 0.58, blue: 0.7))
 
-                    // Floating preview buttons
-                    HStack(spacing: 12) {
-                        // Tele preview
-                        Button(action: { vpnManager.toggleTele() }) {
-                            ZStack {
-                                Circle().fill(LinearGradient(colors: [Color(red: 0.7, green: 0.15, blue: 1.0), Color(red: 0.44, green: 0.0, blue: 1.0)], startPoint: .top, endPoint: .bottom))
+                        // Floating preview buttons
+                        HStack(spacing: 12) {
+                            // Tele preview
+                            Button(action: { vpnManager.toggleTele() }) {
+                                ZStack {
+                                    Circle().fill(vpnManager.isTeleActive ?
+                                        LinearGradient(colors: [Color(red: 1.0, green: 0.16, blue: 0.33), Color(red: 0.7, green: 0.15, blue: 1.0)], startPoint: .top, endPoint: .bottom) :
+                                        LinearGradient(colors: [Color(red: 0.7, green: 0.15, blue: 1.0), Color(red: 0.44, green: 0.0, blue: 1.0)], startPoint: .top, endPoint: .bottom)
+                                    )
                                     .frame(width: 54, height: 54)
-                                VStack(spacing: 1) {
-                                    Image(systemName: "bolt.fill").foregroundColor(.white).font(.system(size: 18))
-                                    Text("TELE").font(.system(size: 9, weight: .bold)).foregroundColor(.white)
+                                    VStack(spacing: 1) {
+                                        Image(systemName: "bolt.fill").foregroundColor(.white).font(.system(size: 18))
+                                        Text(vpnManager.isTeleActive ? String(format: "%.1fs", vpnManager.teleRemainingSeconds) : "TELE")
+                                            .font(.system(size: 9, weight: .bold)).foregroundColor(.white)
+                                    }
                                 }
                             }
-                        }
 
-                        // Lag preview
-                        Button(action: { vpnManager.toggleLag() }) {
-                            ZStack {
-                                Circle().fill(LinearGradient(colors: [Color(red: 0.0, green: 0.82, blue: 1.0), Color(red: 0.0, green: 0.4, blue: 1.0)], startPoint: .top, endPoint: .bottom))
+                            // Lag preview
+                            Button(action: { vpnManager.toggleLag() }) {
+                                ZStack {
+                                    Circle().fill(vpnManager.isLagActive ?
+                                        LinearGradient(colors: [Color(red: 1.0, green: 0.16, blue: 0.33), Color(red: 0.77, green: 0.0, blue: 0.17)], startPoint: .top, endPoint: .bottom) :
+                                        LinearGradient(colors: [Color(red: 0.0, green: 0.82, blue: 1.0), Color(red: 0.0, green: 0.4, blue: 1.0)], startPoint: .top, endPoint: .bottom)
+                                    )
                                     .frame(width: 54, height: 54)
-                                VStack(spacing: 1) {
-                                    Image(systemName: "gamecontroller.fill").foregroundColor(.white).font(.system(size: 18))
-                                    Text("LAG").font(.system(size: 9, weight: .bold)).foregroundColor(.white)
+                                    VStack(spacing: 1) {
+                                        Image(systemName: "gamecontroller.fill").foregroundColor(.white).font(.system(size: 18))
+                                        Text(vpnManager.isLagActive ? String(format: "%.1fs", vpnManager.lagRemainingSeconds) : "LAG")
+                                            .font(.system(size: 9, weight: .bold)).foregroundColor(.white)
+                                    }
                                 }
                             }
-                        }
 
-                        // Menu button
-                        Button(action: { settings.isPanelShowing.toggle() }) {
-                            Image(systemName: "gearshape.fill")
-                                .font(.system(size: 20))
+                            // Menu button
+                            Button(action: { settings.isPanelShowing.toggle() }) {
+                                Image(systemName: "gearshape.fill")
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.white)
+                                    .frame(width: 38, height: 54)
+                            }
+                        }
+                        .padding(8)
+                        .background(Color(red: 0.07, green: 0.08, blue: 0.13))
+                        .cornerRadius(16)
+                        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color(red: 0.2, green: 0.23, blue: 0.35), lineWidth: 1))
+
+                        Text(String(format: "⚡ TELE: %.1fs  |  🎮 LAG DAME: %.1fs", settings.durasiTeleSeconds, settings.durasiLagSeconds))
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundColor(Color(red: 0.0, green: 1.0, blue: 0.53))
+                    }
+                    .padding(14)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(red: 0.09, green: 0.1, blue: 0.16))
+                    .cornerRadius(18)
+                    .overlay(RoundedRectangle(cornerRadius: 18).stroke(Color(red: 0.18, green: 0.2, blue: 0.33), lineWidth: 1.5))
+                    .padding(.horizontal, 16)
+
+                    // In-Game iOS Shortcut Guide Box
+                    VStack(alignment: .leading, spacing: 6) {
+                        HStack {
+                            Image(systemName: "iphone.radiowaves.left.and.right")
+                                .foregroundColor(Color(red: 0.0, green: 0.82, blue: 1.0))
+                            Text("ĐIỀU KHIỂN TRONG KHI ĐANG CHƠI GAME:")
+                                .font(.system(size: 11, weight: .bold))
                                 .foregroundColor(.white)
-                                .frame(width: 38, height: 54)
+                        }
+                        HStack(spacing: 8) {
+                            HStack(spacing: 4) {
+                                Image(systemName: "speaker.wave.3.fill").foregroundColor(Color(red: 0.7, green: 0.15, blue: 1.0))
+                                Text("Nút Tăng Âm: BẬT TELE").font(.system(size: 10, weight: .bold)).foregroundColor(Color(red: 0.85, green: 0.55, blue: 1.0))
+                            }
+                            Spacer()
+                            HStack(spacing: 4) {
+                                Image(systemName: "speaker.wave.1.fill").foregroundColor(Color(red: 0.0, green: 0.82, blue: 1.0))
+                                Text("Nút Giảm Âm: BẬT LAG").font(.system(size: 10, weight: .bold)).foregroundColor(Color(red: 0.0, green: 0.82, blue: 1.0))
+                            }
+                        }
+                        Text("Khi nhấn BẮT ĐẦU, bạn vào game chỉ cần bấm nút âm lượng của iPhone là sẽ kích hoạt Tele / Lag ngay lập tức kèm tiếng kêu Hz.")
+                            .font(.system(size: 9))
+                            .foregroundColor(Color(red: 0.55, green: 0.58, blue: 0.7))
+                    }
+                    .padding(12)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(red: 0.08, green: 0.1, blue: 0.17))
+                    .cornerRadius(14)
+                    .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color(red: 0.2, green: 0.25, blue: 0.4), lineWidth: 1))
+                    .padding(.horizontal, 16)
+
+                    // Action Buttons
+                    VStack(spacing: 10) {
+                        // START
+                        Button(action: {
+                            settings.isServiceRunning = true
+                            settings.isPanelShowing = true
+                            VolumeButtonObserver.shared.startListening()
+                        }) {
+                            Text(settings.isServiceRunning ? "ĐANG CHẠY TRỢ LÝ GAMING ✔" : "BẮT ĐẦU NÚT NỔI & PHÍM ÂM LƯỢNG")
+                                .font(.system(size: 15, weight: .bold))
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 50)
+                                .background(LinearGradient(colors: [Color(red: 0.0, green: 0.8, blue: 0.4), Color(red: 0.0, green: 0.6, blue: 0.3)], startPoint: .top, endPoint: .bottom))
+                                .cornerRadius(12)
+                                .shadow(color: Color.green.opacity(0.3), radius: 6)
+                        }
+
+                        // STOP
+                        Button(action: {
+                            settings.isServiceRunning = false
+                            settings.isPanelShowing = false
+                            VolumeButtonObserver.shared.stopListening()
+                            vpnManager.stopTele()
+                            vpnManager.stopLag()
+                        }) {
+                            Text("DỪNG LẠI")
+                                .font(.system(size: 15, weight: .bold))
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 50)
+                                .background(LinearGradient(colors: [Color(red: 1.0, green: 0.16, blue: 0.33), Color(red: 0.8, green: 0.0, blue: 0.2)], startPoint: .top, endPoint: .bottom))
+                                .cornerRadius(12)
+                                .shadow(color: Color.red.opacity(0.3), radius: 6)
+                        }
+
+                        // Game Mode Picker Button
+                        Button(action: cycleGameMode) {
+                            Text("CHẾ ĐỘ: \(settings.gameMode)")
+                                .font(.system(size: 13, weight: .bold))
+                                .foregroundColor(Color(red: 0.7, green: 0.15, blue: 1.0))
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 48)
+                                .background(Color(red: 0.09, green: 0.1, blue: 0.16))
+                                .cornerRadius(12)
+                                .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(red: 0.7, green: 0.15, blue: 1.0), lineWidth: 1.5))
                         }
                     }
-                    .padding(8)
-                    .background(Color(red: 0.07, green: 0.08, blue: 0.13))
-                    .cornerRadius(16)
-                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color(red: 0.2, green: 0.23, blue: 0.35), lineWidth: 1))
+                    .padding(.horizontal, 16)
 
-                    Text(String(format: "⚡ TELE: %.1fs  |  🎮 LAG DAME: %.1fs", settings.durasiTeleSeconds, settings.durasiLagSeconds))
-                        .font(.system(size: 13, weight: .bold))
-                        .foregroundColor(Color(red: 0.0, green: 1.0, blue: 0.53))
+                    Text("Bấm icon Bánh răng ⚙️ để mở bảng Menu thu phóng")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundColor(Color(red: 1.0, green: 0.55, blue: 0.0))
+                        .padding(.bottom, 16)
                 }
-                .padding(16)
-                .frame(maxWidth: .infinity)
-                .background(Color(red: 0.09, green: 0.1, blue: 0.16))
-                .cornerRadius(18)
-                .overlay(RoundedRectangle(cornerRadius: 18).stroke(Color(red: 0.18, green: 0.2, blue: 0.33), lineWidth: 1.5))
-                .padding(.horizontal, 16)
-
-                // Action Buttons
-                VStack(spacing: 12) {
-                    // START
-                    Button(action: {
-                        settings.isServiceRunning = true
-                        settings.isPanelShowing = true
-                    }) {
-                        Text("BẮT ĐẦU NÚT NỔI")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 52)
-                            .background(LinearGradient(colors: [Color(red: 0.0, green: 0.8, blue: 0.4), Color(red: 0.0, green: 0.6, blue: 0.3)], startPoint: .top, endPoint: .bottom))
-                            .cornerRadius(12)
-                            .shadow(color: Color.green.opacity(0.3), radius: 6)
-                    }
-
-                    // STOP
-                    Button(action: {
-                        settings.isServiceRunning = false
-                        settings.isPanelShowing = false
-                        vpnManager.stopTele()
-                        vpnManager.stopLag()
-                    }) {
-                        Text("DỪNG LẠI")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 52)
-                            .background(LinearGradient(colors: [Color(red: 1.0, green: 0.16, blue: 0.33), Color(red: 0.8, green: 0.0, blue: 0.2)], startPoint: .top, endPoint: .bottom))
-                            .cornerRadius(12)
-                            .shadow(color: Color.red.opacity(0.3), radius: 6)
-                    }
-
-                    // Game Mode Picker Button
-                    Button(action: cycleGameMode) {
-                        Text("CHẾ ĐỘ: \(settings.gameMode)")
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(Color(red: 0.7, green: 0.15, blue: 1.0))
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 50)
-                            .background(Color(red: 0.09, green: 0.1, blue: 0.16))
-                            .cornerRadius(12)
-                            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(red: 0.7, green: 0.15, blue: 1.0), lineWidth: 1.5))
-                    }
-                }
-                .padding(.horizontal, 16)
-
-                Spacer()
-
-                Text("Bấm icon Bánh răng ⚙️ để mở bảng Menu thu phóng")
-                    .font(.system(size: 11, weight: .bold))
-                    .foregroundColor(Color(red: 1.0, green: 0.55, blue: 0.0))
-                    .padding(.bottom, 16)
             }
 
             // Floating Buttons Overlay Layer
@@ -185,6 +226,7 @@ public struct MainView: View {
                 message: Text("Bạn có muốn đăng xuất Key hiện tại và nhập Key mới không?"),
                 primaryButton: .destructive(Text("Đăng xuất")) {
                     settings.clearLogin()
+                    VolumeButtonObserver.shared.stopListening()
                     onLogout()
                 },
                 secondaryButton: .cancel(Text("Hủy"))
