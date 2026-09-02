@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bg_dark">#0D0E15</color>
+    <color name="card_bg_dark">#161824</color>
+    <color name="card_border_glow">#2E3354</color>
+    
+    <!-- Primary Theme Colors -->
+    <color name="primary_blue">#1947E5</color>
+    <color name="primary_blue_dark">#102E99</color>
+    <color name="bright_red">#FF1744</color>
+    <color name="bright_red_pressed">#D50000</color>
+    <color name="dark_red">#D50000</color>
+    <color name="light_gray">#EEEEEE</color>
+    <color name="gray_text">#757575</color>
+    <color name="dark_gray">#212121</color>
+    <color name="track_gray">#E0E0E0</color>
+    <color name="accent_yellow">#FFD600</color>
+    
+    <!-- Neon Gaming Accents -->
+    <color name="neon_blue">#00D2FF</color>
+    <color name="neon_blue_dark">#0066FF</color>
+    <color name="neon_purple">#B026FF</color>
+    <color name="neon_purple_dark">#7000FF</color>
+    <color name="neon_purple_pressed">#5200BD</color>
+    <color name="neon_green">#00FF88</color>
+    <color name="neon_green_pressed">#00B862</color>
+    <color name="neon_red">#FF2A55</color>
+    <color name="neon_red_pressed">#C4002C</color>
+    <color name="neon_orange">#FF8800</color>
+    
+    <color name="text_title">#FFFFFF</color>
+    <color name="text_subtitle">#8E95B3</color>
+    <color name="text_accent">#00E5FF</color>
+    <color name="transparent">#00000000</color>
+</resources>

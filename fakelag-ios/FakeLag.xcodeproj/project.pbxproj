@@ -1,0 +1,303 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01A00001 /* FakeLagApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A00001 /* FakeLagApp.swift */; };
+		01A00002 /* KeyAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A00002 /* KeyAuthManager.swift */; };
+		01A00003 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A00003 /* SettingsManager.swift */; };
+		01A00004 /* SoundHzHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A00004 /* SoundHzHelper.swift */; };
+		01A00005 /* LagVpnManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A00005 /* LagVpnManager.swift */; };
+		01A00006 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A00006 /* LoginView.swift */; };
+		01A00007 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A00007 /* MainView.swift */; };
+		01A00008 /* FloatingOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A00008 /* FloatingOverlayView.swift */; };
+		01A00009 /* FloatingButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A00009 /* FloatingButtonsView.swift */; };
+		01A0000A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02A0000A /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		00A00001 /* FakeLag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FakeLag.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		02A00001 /* FakeLagApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLagApp.swift; sourceTree = "<group>"; };
+		02A00002 /* KeyAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyAuthManager.swift; sourceTree = "<group>"; };
+		02A00003 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		02A00004 /* SoundHzHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundHzHelper.swift; sourceTree = "<group>"; };
+		02A00005 /* LagVpnManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LagVpnManager.swift; sourceTree = "<group>"; };
+		02A00006 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		02A00007 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		02A00008 /* FloatingOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingOverlayView.swift; sourceTree = "<group>"; };
+		02A00009 /* FloatingButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButtonsView.swift; sourceTree = "<group>"; };
+		02A0000A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		02A0000B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		03A00001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04A00001 = {
+			isa = PBXGroup;
+			children = (
+				04A00002 /* FakeLag */,
+				04A00006 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		04A00002 /* FakeLag */ = {
+			isa = PBXGroup;
+			children = (
+				04A00003 /* App */,
+				04A00004 /* Services */,
+				04A00005 /* Views */,
+				02A0000A /* Assets.xcassets */,
+				02A0000B /* Info.plist */,
+			);
+			path = FakeLag;
+			sourceTree = "<group>";
+		};
+		04A00003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				02A00001 /* FakeLagApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		04A00004 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				02A00002 /* KeyAuthManager.swift */,
+				02A00003 /* SettingsManager.swift */,
+				02A00004 /* SoundHzHelper.swift */,
+				02A00005 /* LagVpnManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		04A00005 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				02A00006 /* LoginView.swift */,
+				02A00007 /* MainView.swift */,
+				02A00008 /* FloatingOverlayView.swift */,
+				02A00009 /* FloatingButtonsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		04A00006 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00A00001 /* FakeLag.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05A00001 /* FakeLag */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06A00001 /* Build configuration list for PBXNativeTarget "FakeLag" */;
+			buildPhases = (
+				07A00001 /* Sources */,
+				03A00001 /* Frameworks */,
+				08A00001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FakeLag;
+			productName = FakeLag;
+			productReference = 00A00001 /* FakeLag.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		09A00001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					05A00001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 06A00002 /* Build configuration list for PBXProject "FakeLag" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04A00001;
+			productRefGroup = 04A00006 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05A00001 /* FakeLag */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		08A00001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01A0000A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07A00001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01A00001 /* FakeLagApp.swift in Sources */,
+				01A00002 /* KeyAuthManager.swift in Sources */,
+				01A00003 /* SettingsManager.swift in Sources */,
+				01A00004 /* SoundHzHelper.swift in Sources */,
+				01A00005 /* LagVpnManager.swift in Sources */,
+				01A00006 /* LoginView.swift in Sources */,
+				01A00007 /* MainView.swift in Sources */,
+				01A00008 /* FloatingOverlayView.swift in Sources */,
+				01A00009 /* FloatingButtonsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0AA00001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = FakeLag/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.6;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fakelag.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0AA00002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = FakeLag/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.6;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fakelag.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0AA00003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0AA00004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		06A00001 /* Build configuration list for PBXNativeTarget "FakeLag" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AA00001 /* Debug */,
+				0AA00002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06A00002 /* Build configuration list for PBXProject "FakeLag" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AA00003 /* Debug */,
+				0AA00004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 09A00001 /* Project object */;
+}

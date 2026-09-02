@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">NOVA FAKE LAG</string>
+    <string name="title_app">NOVA FAKE LAG</string>
+    <string name="durasi_lag_format">Thời gian lag: %.1f giây</string>
+    <string name="durasi_lag_default">Thời gian lag: 1,5 giây</string>
+    <string name="btn_start">BẮT ĐẦU</string>
+    <string name="btn_stop">DỪNG LẠI</string>
+    <string name="btn_ff_normal">FF THƯỜNG</string>
+    <string name="bottom_hint">Giữ lâu icon tròn để mở menu cài đặt</string>
+    
+    <!-- Settings Panel Strings -->
+    <string name="panel_title">NOVA FAKE LAG</string>
+    <string name="setting_icon_size">Kích thước icon: %d dp</string>
+    <string name="setting_durasi_lag">Thời gian lag: %.1f giây</string>
+    <string name="setting_interval">Chu kỳ: %.1fs</string>
+    <string name="setting_opacity">Độ mờ icon: %d%%</string>
+    
+    <string name="chk_lock_position">Khóa vị trí icon</string>
+    <string name="chk_sound_beep">Âm thanh Beep</string>
+    <string name="chk_volume_key">Bật/Tắt bằng phím Âm lượng</string>
+    <string name="chk_auto_lag">Tự động Lag (Auto Lag)</string>
+    
+    <string name="permission_overlay_title">Quyền hiển thị cửa sổ nổi</string>
+    <string name="permission_overlay_desc">NOVA FAKE LAG cần quyền hiển thị trên các ứng dụng khác để bật nút điều khiển nổi khi đang chơi game.</string>
+    <string name="permission_vpn_desc">NOVA FAKE LAG cần quyền kết nối VPN để điều chỉnh độ trễ gói tin game.</string>
+</resources>

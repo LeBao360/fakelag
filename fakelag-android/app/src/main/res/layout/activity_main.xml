@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:padding="20dp">
+
+    <!-- Top App Title & Badge -->
+    <LinearLayout
+        android:id="@+id/headerContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.08"
+            android:text="⚡ NOVA FAKE LAG PRO"
+            android:textColor="@color/neon_blue"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="ASSISTANT FOR FREE FIRE &amp; GAMING"
+            android:textColor="@color/text_subtitle"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <!-- License Key Info Badge Row -->
+        <LinearLayout
+            android:id="@+id/licenseBadgeRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_chip_scale"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="3dp">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="5dp"
+                android:contentDescription="Key"
+                android:src="@drawable/bi_key_fill" />
+
+            <TextView
+                android:id="@+id/tvLicenseStatusMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Key: Vĩnh viễn (LIFETIME)"
+                android:textColor="@color/accent_yellow"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/btnLogoutKey"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_btn_round_action"
+                android:clickable="true"
+                android:contentDescription="Đổi Key"
+                android:focusable="true"
+                android:padding="3dp"
+                android:src="@drawable/bi_box_arrow_right" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Floating Dock Preview Card in Main Screen -->
+    <LinearLayout
+        android:id="@+id/cardPreview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/bg_gaming_panel"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerContainer">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BẢNG ĐIỀU KHIỂN NỔI GAMING"
+            android:textColor="@color/text_subtitle"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <!-- Preview Dock with TELE & LAG -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_floating_dock"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <FrameLayout
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:background="@drawable/bg_circle_tele">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:contentDescription="TELE"
+                        android:src="@drawable/bi_lightning_charge_fill" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TELE"
+                        android:textColor="@color/white"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_circle_lag">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:contentDescription="LAG"
+                        android:src="@drawable/bi_controller" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="LAG"
+                        android:textColor="@color/white"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="6dp"
+                android:contentDescription="Menu"
+                android:src="@drawable/bi_gear_fill" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvDurasiLagMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="⚡ TELE: 0,8s  |  🎮 LAG DAME: 1,5s"
+            android:textColor="@color/neon_green"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- START button (Neon Green) -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnStart"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/bg_btn_green"
+        android:elevation="6dp"
+        android:stateListAnimator="@null"
+        android:text="@string/btn_start"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnStop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardPreview" />
+
+    <!-- STOP button (Neon Red) -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnStop"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/bg_btn_red"
+        android:elevation="6dp"
+        android:stateListAnimator="@null"
+        android:text="@string/btn_stop"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnFfNormal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStart" />
+
+    <!-- Game Mode Preset button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFfNormal"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/bg_gaming_panel"
+        android:elevation="4dp"
+        android:stateListAnimator="@null"
+        android:text="CHẾ ĐỘ: FF THƯỜNG"
+        android:textColor="@color/neon_purple"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvBottomHint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStop" />
+
+    <!-- Bottom Hint -->
+    <TextView
+        android:id="@+id/tvBottomHint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:gravity="center"
+        android:text="Bấm icon Bánh răng ⚙️ trên thanh nổi để mở bảng Menu phóng to/thu nhỏ"
+        android:textColor="@color/neon_orange"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFfNormal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

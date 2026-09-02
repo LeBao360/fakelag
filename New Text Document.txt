@@ -1,0 +1,1 @@
+python -m nuitka --onefile --standalone --enable-plugin=pyqt6 --windows-console-mode=disable --windows-icon-from-ico=icon.ico --include-package-data=pydivert "--include-data-files=C:\Users\quocb\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydivert\windivert_dll\WinDivert64.dll=pydivert/windivert_dll/WinDivert64.dll" --windows-uac-admin fakelag.py

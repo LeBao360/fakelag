@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settingsCardRoot"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_gaming_panel"
+    android:elevation="16dp"
+    android:orientation="vertical"
+    android:paddingStart="14dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="14dp"
+    android:paddingBottom="10dp">
+
+    <!-- Top Drag Header Bar (Touch & Drag to Move Menu) -->
+    <LinearLayout
+        android:id="@+id/panelHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn_action"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="4dp">
+
+        <!-- Bootstrap Move Handle Icon -->
+        <ImageView
+            android:id="@+id/ivMoveHandle"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="6dp"
+            android:contentDescription="Drag Move"
+            android:src="@drawable/bi_arrows_move" />
+
+        <TextView
+            android:id="@+id/tvPanelTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:letterSpacing="0.04"
+            android:text="NOVA FAKE LAG PRO"
+            android:textColor="@color/neon_blue"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- Bootstrap Minimize Button -->
+        <ImageView
+            android:id="@+id/btnMinimizePanel"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/bg_btn_round_action"
+            android:clickable="true"
+            android:contentDescription="Minimize"
+            android:focusable="true"
+            android:padding="5dp"
+            android:src="@drawable/bi_dash_lg" />
+
+        <!-- Bootstrap Close Button -->
+        <ImageView
+            android:id="@+id/btnClosePanel"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:background="@drawable/bg_btn_round_action"
+            android:clickable="true"
+            android:contentDescription="Close"
+            android:focusable="true"
+            android:padding="5dp"
+            android:src="@drawable/bi_x_lg" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:background="#2E3456" />
+
+    <!-- 1. Thu phóng Menu (Interactive Scale / Zoom) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="6dp"
+            android:contentDescription="Zoom"
+            android:src="@drawable/bi_zoom_in" />
+
+        <TextView
+            android:id="@+id/tvPanelScale"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Thu phóng menu: 100%"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- Quick scale chips -->
+        <TextView
+            android:id="@+id/btnScale80"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/bg_chip_scale"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:text="80%"
+            android:textColor="@color/neon_purple"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnScale100"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/bg_chip_scale"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:text="100%"
+            android:textColor="@color/neon_blue"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnScale120"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:background="@drawable/bg_chip_scale"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:text="120%"
+            android:textColor="@color/neon_green"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seekPanelScale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:max="140"
+        android:progress="100"
+        android:progressTint="@color/neon_purple"
+        android:thumbTint="@color/neon_purple" />
+
+    <!-- 2. Thời gian TELE (Flash Lag) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="6dp"
+            android:contentDescription="Tele"
+            android:src="@drawable/bi_lightning_charge_fill" />
+
+        <TextView
+            android:id="@+id/tvDurasiTele"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thời gian TELE: 0,8 giây"
+            android:textColor="#D88AFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seekDurasiTele"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:max="20"
+        android:progress="8"
+        android:progressTint="@color/neon_purple"
+        android:thumbTint="@color/neon_purple" />
+
+    <!-- 3. Thời gian LAG DAME -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="6dp"
+            android:contentDescription="Lag"
+            android:src="@drawable/bi_controller" />
+
+        <TextView
+            android:id="@+id/tvDurasiLag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thời gian LAG DAME: 1,5 giây"
+            android:textColor="@color/neon_blue"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seekDurasiLag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:max="50"
+        android:progress="15"
+        android:progressTint="@color/neon_blue"
+        android:thumbTint="@color/neon_blue" />
+
+    <!-- 4. Kích thước nút nổi -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="6dp"
+            android:contentDescription="Icon Size"
+            android:src="@drawable/bi_sliders" />
+
+        <TextView
+            android:id="@+id/tvUkuranIkon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kích thước nút nổi: 58 dp"
+            android:textColor="@color/text_subtitle"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seekUkuranIkon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:max="90"
+        android:progress="58"
+        android:progressTint="@color/neon_green"
+        android:thumbTint="@color/neon_green" />
+
+    <!-- 5. Độ mờ nút nổi -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="6dp"
+            android:contentDescription="Opacity"
+            android:src="@drawable/bi_eye_fill" />
+
+        <TextView
+            android:id="@+id/tvOpacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Độ mờ nút nổi: 90%"
+            android:textColor="@color/text_subtitle"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seekOpacity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:max="100"
+        android:progress="90"
+        android:progressTint="@color/neon_blue"
+        android:thumbTint="@color/neon_blue" />
+
+    <!-- 6. Checkboxes with Bootstrap Icons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/chkShowTele"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:buttonTint="@color/neon_purple"
+            android:checked="true"
+            android:drawableStart="@drawable/bi_lightning_charge_fill"
+            android:drawablePadding="8dp"
+            android:text="Hiện nút TELE (Tím)"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/chkShowLag"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:buttonTint="@color/neon_blue"
+            android:checked="true"
+            android:drawableStart="@drawable/bi_controller"
+            android:drawablePadding="8dp"
+            android:text="Hiện nút LAG DAME (Xanh)"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/chkLockPosition"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:buttonTint="@color/neon_blue"
+            android:drawableStart="@drawable/bi_lock_fill"
+            android:drawablePadding="8dp"
+            android:text="Khóa vị trí nút nổi"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/chkSoundBeep"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:buttonTint="@color/neon_blue"
+            android:checked="true"
+            android:drawableStart="@drawable/bi_bell_fill"
+            android:drawablePadding="8dp"
+            android:text="Âm thanh Beep báo hiệu"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/chkVolumeKey"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:buttonTint="@color/neon_purple"
+            android:drawableStart="@drawable/bi_volume_up_fill"
+            android:drawablePadding="8dp"
+            android:text="Phím Âm lượng = Bật TELE"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- Bottom Actions Row & Corner Resize Grip -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btnQuickMinus"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_action"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="– 0.2s"
+            android:textColor="@color/neon_blue"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnQuickPlus"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_action"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="+ 0.2s"
+            android:textColor="@color/neon_blue"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!-- Touch Drag Resize Corner Handle (Chạm vào kéo để thu phóng menu) -->
+        <FrameLayout
+            android:id="@+id/btnPanelResizeHandle"
+            android:layout_width="36dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_btn_round_action"
+            android:clickable="true"
+            android:contentDescription="Drag to Resize"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:contentDescription="Resize"
+                android:src="@drawable/bi_arrows_angle_expand" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Visual Gesture Hint -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="Gesture"
+            android:src="@drawable/bi_hand_index_thumb" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kéo tiêu đề để di chuyển • Kéo góc ⤢ hoặc chụm 2 ngón để thu phóng"
+            android:textColor="@color/text_subtitle"
+            android:textSize="9sp" />
+    </LinearLayout>
+
+</LinearLayout>
